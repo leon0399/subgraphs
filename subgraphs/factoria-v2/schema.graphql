@@ -15,4 +15,10 @@ type Collection @entity {
 
   " Collection symbol, mirrored from the smart contract. "
   symbol: String
+
+  " Address of collection owner. "
+  ownerId: ID!
+
+  " Address of collection deployer. "
+  deployerId: ID!
 }
