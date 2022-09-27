@@ -1,0 +1,18 @@
+type Factory @entity {
+  " Factory address "
+  id: ID!
+
+  " Amount of collections created"
+  collectionCount: BigInt!
+}
+
+type Collection @entity {
+  " Contract address. "
+  id: ID!
+
+  " Collection name, mirrored from the smart contract. "
+  name: String
+
+  " Collection symbol, mirrored from the smart contract. "
+  symbol: String
+}

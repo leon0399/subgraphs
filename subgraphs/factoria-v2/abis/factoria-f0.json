@@ -1,0 +1,942 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "approved",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "Approval",
+    "type": "event",
+    "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "approved",
+        "type": "bool"
+      }
+    ],
+    "name": "ApprovalForAll",
+    "type": "event",
+    "signature": "0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "placeholder",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "base",
+            "type": "string"
+          },
+          {
+            "internalType": "uint64",
+            "name": "supply",
+            "type": "uint64"
+          },
+          {
+            "internalType": "bool",
+            "name": "permanent",
+            "type": "bool"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct F0.Config",
+        "name": "config",
+        "type": "tuple"
+      }
+    ],
+    "name": "Configured",
+    "type": "event",
+    "signature": "0x4363c3792b29c84c812e55c3980736e603dd322c6558532d35d39eb614d00749"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "key",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "cid",
+        "type": "bytes32"
+      }
+    ],
+    "name": "Invited",
+    "type": "event",
+    "signature": "0xe9a0c17645ed78ccc9996259f00297ffc75e6b9d22cd605ccc9992cc8ca3f4c1"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "symbol",
+        "type": "string"
+      }
+    ],
+    "name": "NSUpdated",
+    "type": "event",
+    "signature": "0x934066d47a89bfcab72db908a0701b9145131ee303cefb44553121c73419e8dd"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event",
+    "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "Transfer",
+    "type": "event",
+    "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "permanent",
+            "type": "bool"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct F0.Withdrawer",
+        "name": "withdrawer",
+        "type": "tuple"
+      }
+    ],
+    "name": "WithdrawerUpdated",
+    "type": "event",
+    "signature": "0x5d121f0c2b2c4877a2b0a1457c73ce1c28628e5705271cb91db3e49792715cf5"
+  },
+  {
+    "inputs": [],
+    "name": "URI",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x1141d7de"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "approve",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x095ea7b3"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      }
+    ],
+    "name": "balanceOf",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x70a08231"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "burn",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x42966c68"
+  },
+  {
+    "inputs": [],
+    "name": "config",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "placeholder",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "base",
+        "type": "string"
+      },
+      {
+        "internalType": "uint64",
+        "name": "supply",
+        "type": "uint64"
+      },
+      {
+        "internalType": "bool",
+        "name": "permanent",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x79502c55"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getApproved",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x081812fc"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_receiver",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_count",
+        "type": "uint256"
+      }
+    ],
+    "name": "gift",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xcbce4c97"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "symbol",
+        "type": "string"
+      },
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "placeholder",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "base",
+            "type": "string"
+          },
+          {
+            "internalType": "uint64",
+            "name": "supply",
+            "type": "uint64"
+          },
+          {
+            "internalType": "bool",
+            "name": "permanent",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct F0.Config",
+        "name": "_config",
+        "type": "tuple"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x2b262678"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "invite",
+    "outputs": [
+      {
+        "internalType": "uint128",
+        "name": "price",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint64",
+        "name": "start",
+        "type": "uint64"
+      },
+      {
+        "internalType": "uint64",
+        "name": "limit",
+        "type": "uint64"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x164ec6f5"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      }
+    ],
+    "name": "isApprovedForAll",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xe985e9c5"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "key",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32[]",
+            "name": "proof",
+            "type": "bytes32[]"
+          }
+        ],
+        "internalType": "struct F0.Auth",
+        "name": "auth",
+        "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_count",
+        "type": "uint256"
+      }
+    ],
+    "name": "mint",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true,
+    "signature": "0xb774cf90"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x06fdde03"
+  },
+  {
+    "inputs": [],
+    "name": "nextId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x61b8ce8c"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x8da5cb5b"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ownerOf",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x6352211e"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x715018a6"
+  },
+  {
+    "inputs": [],
+    "name": "royalty",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x29ee566c"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "royaltyInfo",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "royaltyAmount",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x2a55205a"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "safeTransferFrom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x42842e0e"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_data",
+        "type": "bytes"
+      }
+    ],
+    "name": "safeTransferFrom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xb88d4fde"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "operator",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "approved",
+        "type": "bool"
+      }
+    ],
+    "name": "setApprovalForAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xa22cb465"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "placeholder",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "base",
+            "type": "string"
+          },
+          {
+            "internalType": "uint64",
+            "name": "supply",
+            "type": "uint64"
+          },
+          {
+            "internalType": "bool",
+            "name": "permanent",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct F0.Config",
+        "name": "_config",
+        "type": "tuple"
+      }
+    ],
+    "name": "setConfig",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x57068f0a"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_key",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_cid",
+        "type": "bytes32"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "price",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint64",
+            "name": "start",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "limit",
+            "type": "uint64"
+          }
+        ],
+        "internalType": "struct F0.Invite",
+        "name": "_invite",
+        "type": "tuple"
+      }
+    ],
+    "name": "setInvite",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xe4963dd5"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "name_",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "symbol_",
+        "type": "string"
+      }
+    ],
+    "name": "setNS",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x35c93885"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "setRoyalty",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x2a6432a4"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_uri",
+        "type": "string"
+      }
+    ],
+    "name": "setURI",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x02fe5305"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "permanent",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct F0.Withdrawer",
+        "name": "_withdrawer",
+        "type": "tuple"
+      }
+    ],
+    "name": "setWithdrawer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x4fc41a42"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x01ffc9a7"
+  },
+  {
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0x95d89b41"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "tokenURI",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xc87b56dd"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "transferFrom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x23b872dd"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xf2fde38b"
+  },
+  {
+    "inputs": [],
+    "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function",
+    "payable": true,
+    "signature": "0x3ccfd60b"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawer",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "permanent",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true,
+    "signature": "0xcdc18424"
+  }
+]
