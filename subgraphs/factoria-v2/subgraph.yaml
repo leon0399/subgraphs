@@ -6,8 +6,8 @@ dataSources:
     name: Factoria
     network: mainnet
     source:
-      address: "0x4d70631664f1cec37d33f289a3293662d70741c3"
       abi: Factory
+      address: "0x4d70631664f1cec37d33f289a3293662d70741c3"
       startBlock: 14158321
     mapping:
       kind: ethereum/events
@@ -24,4 +24,23 @@ dataSources:
       eventHandlers:
         - event: CollectionAdded(indexed address,indexed address,address)
           handler: handleCollectionAdded
-      file: ./src/factory.ts
+      file: ./src/mappings/factory.ts
+templates:
+  - kind: ethereum/contract
+    name: Collection
+    network: mainnet
+    source:
+      abi: F0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Collection
+      abis:
+        - name: F0
+          file: ./abis/factoria-f0.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mappings/collection.ts

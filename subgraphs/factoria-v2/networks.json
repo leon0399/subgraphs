@@ -1,7 +1,14 @@
 {
   "mainnet": {
-    "Factory": {
-      "address": "0x4d70631664f1cec37d33f289a3293662d70741c3"
+    "Factoria": {
+      "address": "0x4d70631664f1cec37d33f289a3293662d70741c3",
+      "startBlock": 14158321
+    }
+  },
+  "rinkeby": {
+    "Factoria": {
+      "address": "0xB4051d6205f6B98e5CB1238DaA279D8b875BF144",
+      "startBlock": 10126918
     }
   }
 }

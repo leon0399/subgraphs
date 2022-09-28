@@ -16,9 +16,41 @@ type Collection @entity {
   " Collection symbol, mirrored from the smart contract. "
   symbol: String
 
+  " Total number of unique minted tokens in the collection "
+  tokenCount: BigInt!
+
+  " Total number of unique token owners holding tokens in the collection "
+  ownerCount: BigInt!
+
+  " Total number of token transfer events "
+  transferCount: BigInt!
+
   " Address of collection owner. "
   ownerId: ID!
 
   " Address of collection deployer. "
   deployerId: ID!
+
+  " Tokens in the collection "
+  tokens: [Token!]! @derivedFrom(field: "collection")
+}
+
+type Token @entity {
+  " Address of the token, { Contract Address }-{ Token ID }  "
+  id: ID!
+
+  " Collection for the token "
+  collection: Collection!
+
+  " ID of the token from the collection "
+  tokenId: BigInt!
+
+  " URI of the token "
+  tokenURI: String
+
+  " The owner for the token "
+  ownerId: ID!
+
+  " Timestamp of the token's mint "
+  mintTime: BigInt!
 }
