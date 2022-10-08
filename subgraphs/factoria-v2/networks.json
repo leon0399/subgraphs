@@ -10,5 +10,11 @@
       "address": "0xB4051d6205f6B98e5CB1238DaA279D8b875BF144",
       "startBlock": 10126918
     }
+  },
+  "goerli": {
+    "Factoria": {
+      "address": "0x45368836342D6544f98FF4bA0A136C0508E3ac90",
+      "startBlock": 7597726
+    }
   }
 }
