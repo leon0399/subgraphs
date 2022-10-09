@@ -50,7 +50,4 @@ type Token @entity {
 
   " The owner for the token "
   ownerId: ID!
-
-  " Timestamp of the token's mint "
-  mintTime: BigInt!
 }
