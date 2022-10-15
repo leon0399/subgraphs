@@ -33,10 +33,13 @@ type Collection @entity {
 
   " Tokens in the collection "
   tokens: [Token!]! @derivedFrom(field: "collection")
+
+  " List of token transfers "
+  transfers: [Transfer!]! @derivedFrom(field: "collection")
 }
 
 type Token @entity {
-  " Address of the token, { Contract Address }-{ Token ID }  "
+  " Address of the token, { Contract Address }/{ Token ID }  "
   id: ID!
 
   " Collection for the token "
@@ -50,4 +53,36 @@ type Token @entity {
 
   " The owner for the token "
   ownerId: ID!
+}
+
+type Transfer @entity {
+  " { Contract ID }/{ Transaction hash }/{ Log index } "
+  id: ID!
+
+  " Transaction hash of the transaction that emitted this event "
+  hash: String!
+
+  " Event log index. For transactions that don't emit event, create arbitrary index starting from 0 "
+  logIndex: Int!
+
+  " The ERC721 Collection this event belongs to "
+  collection: Collection!
+
+  " Nonce of the transaction that emitted this event "
+  nonce: Int!
+
+  " ID of the token transferred "
+  tokenId: BigInt!
+
+  " Account that received the tokens "
+  to: ID!
+
+  " Account that sent the tokens "
+  from: ID!
+
+  " Block number of this event "
+  blockNumber: BigInt!
+
+  " Timestamp of this event "
+  timestamp: BigInt!
 }

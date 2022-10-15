@@ -1,7 +1,7 @@
 import { Address, BigInt, ethereum, log } from "@graphprotocol/graph-ts"
 
 import { F0, Transfer as TransferEvent } from '../../generated/Factoria/F0';
-import { Collection, Token } from "../../generated/schema";
+import { Collection, Token, Transfer } from "../../generated/schema";
 import { BIGINT_ONE, GENESIS_ADDRESS } from "../common/constants";
 import { createToken, getTokenId } from "../common/token";
 
@@ -44,4 +44,28 @@ export function handleTransfer(event: TransferEvent): void {
 
   collection.transferCount = collection.transferCount.plus(BIGINT_ONE)
   collection.save()
+
+  const transfer = createTransfer(event)
+  transfer.save()
+}
+
+function createTransfer(event: TransferEvent): Transfer {
+  const collectionId = event.address.toHex()
+  const transactionHash = event.transaction.hash.toHex()
+  const logIndex = event.logIndex
+
+  const transferId = `${collectionId}/${transactionHash}/${logIndex.toString()}`
+  const transfer = new Transfer(transferId)
+
+  transfer.hash = transactionHash
+  transfer.logIndex = logIndex.toI32()
+  transfer.collection = collectionId
+  transfer.nonce = event.transaction.nonce.toI32()
+  transfer.tokenId = event.params.tokenId
+  transfer.from = event.params.from.toHex()
+  transfer.to = event.params.to.toHex()
+  transfer.blockNumber = event.block.number
+  transfer.timestamp = event.block.timestamp
+
+  return transfer
 }
