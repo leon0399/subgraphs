@@ -86,3 +86,23 @@ type Transfer @entity {
   " Timestamp of this event "
   timestamp: BigInt!
 }
+
+type AccountBalance @entity {
+  " { Address Of the Account }/{ Address of the Collection }"
+  id: ID!
+
+  " Account address "
+  account: ID!
+
+  " Collection address "
+  collection: Collection!
+
+  " Current token amount for the collection "
+  tokenCount: BigInt!
+
+  " Block number in which the balance was last modified "
+  blockNumber: BigInt!
+
+  " Timestamp in which the balance was last modified "
+  timestamp: BigInt!
+}

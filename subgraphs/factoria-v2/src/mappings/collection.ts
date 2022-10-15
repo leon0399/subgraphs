@@ -1,8 +1,9 @@
 import { Address, BigInt, ethereum, log } from "@graphprotocol/graph-ts"
 
 import { F0, Transfer as TransferEvent } from '../../generated/Factoria/F0';
-import { Collection, Token, Transfer } from "../../generated/schema";
-import { BIGINT_ONE, GENESIS_ADDRESS } from "../common/constants";
+import { AccountBalance, Collection, Token, Transfer } from "../../generated/schema";
+import { getOrCreateAccountBalance } from "../common/account";
+import { BIGINT_ONE, BIGINT_ZERO, GENESIS_ADDRESS } from "../common/constants";
 import { createToken, getTokenId } from "../common/token";
 
 export function handleTransfer(event: TransferEvent): void {
@@ -23,14 +24,36 @@ export function handleTransfer(event: TransferEvent): void {
     return;
   }
 
+  // update metrics on the sender side
   if (fromAddress.toHex() == GENESIS_ADDRESS) {
     // mint a new token
     collection.tokenCount = collection.tokenCount.plus(BIGINT_ONE)
+  } else {
+    const currentAccountBalance = getOrCreateAccountBalance(fromAddress.toHex(), collectionAddress.toHex())
+    currentAccountBalance.tokenCount = currentAccountBalance.tokenCount.minus(BIGINT_ONE)
+    currentAccountBalance.blockNumber = event.block.number
+    currentAccountBalance.timestamp = event.block.timestamp
+    currentAccountBalance.save()
+
+    if (currentAccountBalance.tokenCount.equals(BIGINT_ZERO)) {
+      collection.ownerCount = collection.ownerCount.minus(BIGINT_ONE)
+    }
   }
 
+  // update metrics on the receiver side
   if (toAddress.toHex() == GENESIS_ADDRESS) {
     // burn an existing token
     collection.tokenCount = collection.tokenCount.minus(BIGINT_ONE)
+  } else {
+    const newAccountBalance = getOrCreateAccountBalance(toAddress.toHex(), collectionAddress.toHex())
+    newAccountBalance.tokenCount = newAccountBalance.tokenCount.plus(BIGINT_ONE)
+    newAccountBalance.blockNumber = event.block.number
+    newAccountBalance.timestamp = event.block.timestamp
+    newAccountBalance.save()
+
+    if (newAccountBalance.tokenCount.equals(BIGINT_ONE)) {
+      collection.ownerCount = collection.ownerCount.plus(BIGINT_ONE);
+    }
   }
 
   const tokenStoreId = getTokenId(collection, tokenId)
