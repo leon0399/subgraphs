@@ -1,6 +1,7 @@
 {
   "name": "factoria-v2",
-  "license": "UNLICENSED",
+  "version": "0.2.0",
+  "license": "MIT",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
