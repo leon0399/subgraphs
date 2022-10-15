@@ -1,10 +1,25 @@
 import { Address, BigInt, ethereum, log } from "@graphprotocol/graph-ts"
 
-import { F0, Transfer as TransferEvent } from '../../generated/Factoria/F0';
+import { F0, Transfer as TransferEvent, NSUpdated as NSUpdatedEvent } from '../../generated/Factoria/F0';
 import { AccountBalance, Collection, Token, Transfer } from "../../generated/schema";
 import { getOrCreateAccountBalance } from "../common/account";
 import { BIGINT_ONE, BIGINT_ZERO, GENESIS_ADDRESS } from "../common/constants";
 import { createToken, getTokenId } from "../common/token";
+
+export function handleNSUpdated(event: NSUpdatedEvent): void {
+  const collectionAddress = event.address;
+
+  let collection = Collection.load(collectionAddress.toHex())
+  if (collection == null) {
+    log.critical('Collection not found!', [])
+    return;
+  }
+
+  collection.name = event.params.name
+  collection.symbol = event.params.symbol
+
+  collection.save()
+}
 
 export function handleTransfer(event: TransferEvent): void {
   const collectionAddress = event.address;
