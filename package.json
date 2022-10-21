@@ -1,5 +1,8 @@
 {
   "license": "MIT",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
   "dependencies": {
     "husky": "^8.0.1"
   }
