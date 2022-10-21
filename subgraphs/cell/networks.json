@@ -1,12 +1,12 @@
 {
   "mainnet": {
-    "Contract": {
+    "Cell": {
       "address": "0x99Ba4B0aA5dD3fa399Ce04aCa79459AcE1c0460c",
       "startBlock": 14878406
     }
   },
   "goerli": {
-    "Contract": {
+    "Cell": {
       "address": "0x99Ba4B0aA5dD3fa399Ce04aCa79459AcE1c0460c",
       "startBlock": 7599604
     }

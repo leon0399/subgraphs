@@ -3,9 +3,7 @@ import { BIGINT_ONE } from './../common/constants';
 import { createFactory } from "../common/factory";
 import { createCollection } from "../common/collection";
 
-import {
-  CollectionAdded,
-} from "../../generated/Factoria/Factory"
+import { CollectionAdded } from "../../generated/Factoria/Factory"
 import { Collection, Factory } from '../../generated/schema';
 
 export function handleCollectionAdded(event: CollectionAdded): void {

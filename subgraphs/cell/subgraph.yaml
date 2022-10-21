@@ -19,7 +19,25 @@ dataSources:
       abis:
         - name: Factory
           file: ./abis/factory.json
+        - name: C0
+          file: ./abis/cell-c0.json
       callHandlers:
         - function: genesis(uint256,string,string)
           handler: handleGenesis
       file: ./src/mappings/factory.ts
+templates:
+  - kind: ethereum/contract
+    name: Collection
+    network: goerli
+    source:
+      abi: C0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Collection
+      abis:
+        - name: C0
+          file: ./abis/cell-c0.json
+      file: ./src/mappings/collection.ts

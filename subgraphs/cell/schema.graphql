@@ -5,3 +5,35 @@ type Factory @entity {
   " Amount of collections created"
   collectionCount: BigInt!
 }
+
+type Collection @entity {
+  " Contract address. "
+  id: ID!
+
+  " Collection name, mirrored from the smart contract. "
+  name: String
+
+  " Collection symbol, mirrored from the smart contract. "
+  symbol: String
+
+  " Total number of unique minted tokens in the collection "
+  tokenCount: BigInt!
+
+  " Total number of unique token owners holding tokens in the collection "
+  ownerCount: BigInt!
+
+  " Total number of token transfer events "
+  transferCount: BigInt!
+
+  " Address of collection owner. "
+  ownerId: ID!
+
+  " Address of collection deployer. "
+  deployerId: ID!
+
+  # " Tokens in the collection "
+  # tokens: [Token!]! @derivedFrom(field: "collection")
+
+  # " List of token transfers "
+  # transfers: [Transfer!]! @derivedFrom(field: "collection")
+}
