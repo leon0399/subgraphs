@@ -31,9 +31,79 @@ type Collection @entity {
   " Address of collection deployer. "
   deployerId: ID!
 
-  # " Tokens in the collection "
-  # tokens: [Token!]! @derivedFrom(field: "collection")
+  " Tokens in the collection "
+  tokens: [Token!]! @derivedFrom(field: "collection")
 
-  # " List of token transfers "
-  # transfers: [Transfer!]! @derivedFrom(field: "collection")
+  " List of token transfers "
+  transfers: [Transfer!]! @derivedFrom(field: "collection")
 }
+
+type Token @entity {
+  " Address of the token, { Contract Address }/{ Token ID }  "
+  id: ID!
+
+  " Collection for the token "
+  collection: Collection!
+
+  " ID of the token from the collection "
+  tokenId: BigInt!
+
+  " URI of the token "
+  tokenURI: String
+
+  " The owner for the token "
+  ownerId: ID!
+}
+
+type Transfer @entity {
+  " { Contract ID }/{ Transaction hash }/{ Log index } "
+  id: ID!
+
+  " Transaction hash of the transaction that emitted this event "
+  hash: String!
+
+  " Event log index. For transactions that don't emit event, create arbitrary index starting from 0 "
+  logIndex: Int!
+
+  " The ERC721 Collection this event belongs to "
+  collection: Collection!
+
+  " Nonce of the transaction that emitted this event "
+  nonce: Int!
+
+  " ID of the token transferred "
+  tokenId: BigInt!
+
+  " Account that received the tokens "
+  to: ID!
+
+  " Account that sent the tokens "
+  from: ID!
+
+  " Block number of this event "
+  blockNumber: BigInt!
+
+  " Timestamp of this event "
+  timestamp: BigInt!
+}
+
+type AccountBalance @entity {
+  " { Address Of the Account }/{ Address of the Collection }"
+  id: ID!
+
+  " Account address "
+  account: ID!
+
+  " Collection address "
+  collection: Collection!
+
+  " Current token amount for the collection "
+  tokenCount: BigInt!
+
+  " Block number in which the balance was last modified "
+  blockNumber: BigInt!
+
+  " Timestamp in which the balance was last modified "
+  timestamp: BigInt!
+}
+

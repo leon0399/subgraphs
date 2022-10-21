@@ -41,6 +41,8 @@ templates:
         - name: C0
           file: ./abis/cell-c0.json
       eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
         - event: NSUpdated(string,string)
           handler: handleNSUpdated
       file: ./src/mappings/collection.ts
