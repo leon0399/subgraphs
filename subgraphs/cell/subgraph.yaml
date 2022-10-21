@@ -1,0 +1,25 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Cell
+    network: goerli
+    source:
+      address: "0x99Ba4B0aA5dD3fa399Ce04aCa79459AcE1c0460c"
+      abi: Factory
+      startBlock: 7599604
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Factory
+        - Cell
+      abis:
+        - name: Factory
+          file: ./abis/factory.json
+      callHandlers:
+        - function: genesis(uint256,string,string)
+          handler: handleGenesis
+      file: ./src/mappings/factory.ts

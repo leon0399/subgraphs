@@ -1,0 +1,7 @@
+type Factory @entity {
+  " Factory address "
+  id: ID!
+
+  " Amount of collections created"
+  collectionCount: BigInt!
+}
