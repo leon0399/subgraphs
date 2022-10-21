@@ -6,7 +6,13 @@
     "preinstall": "npx only-allow pnpm",
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ factoria-v2",
+
+    "deploy:studio:mainnet": "graph deploy --studio factoria-v2 --network=mainnet",
+    "deploy:studio:goerli": "graph deploy --studio factoria-v2-goerli --network=goerli",
+
+    "deploy:hosted:mainnet": "graph deploy --product hosted-service leon0399/factoria-v2 --network=mainnet",
+    "deploy:hosted:goerli": "graph deploy --product hosted-service leon0399/factoria-v2-goerli --network=goerli",
+
     "create-local": "graph create --node http://localhost:8020/ factoria-v2",
     "remove-local": "graph remove --node http://localhost:8020/ factoria-v2",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 factoria-v2",
