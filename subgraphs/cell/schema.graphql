@@ -2,7 +2,7 @@ type Factory @entity {
   " Factory address "
   id: ID!
 
-  " Amount of collections created"
+  " Amount of collections created "
   collectionCount: BigInt!
 }
 
@@ -53,6 +53,22 @@ type Token @entity {
 
   " The owner for the token "
   ownerId: ID!
+
+  " Metadata for the token "
+  metadata: TokenMetadata
+}
+
+type TokenMetadata @entity {
+  " IPFS Hash "
+  id: ID!
+
+  name: String
+
+  description: String
+
+  image: String
+
+  raw: String
 }
 
 type Transfer @entity {
@@ -88,7 +104,7 @@ type Transfer @entity {
 }
 
 type AccountBalance @entity {
-  " { Address Of the Account }/{ Address of the Collection }"
+  " { Address Of the Account }/{ Address of the Collection } "
   id: ID!
 
   " Account address "
