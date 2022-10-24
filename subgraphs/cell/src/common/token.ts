@@ -1,4 +1,4 @@
-import { ipfs, json, BigInt, Bytes } from "@graphprotocol/graph-ts"
+import { ethereum, ipfs, json, BigInt, Bytes } from "@graphprotocol/graph-ts"
 
 import { GENESIS_ADDRESS } from './constants';
 
@@ -9,7 +9,7 @@ export function getTokenId(collection: Collection, tokenId: BigInt): string {
   return `${collection.id}/${tokenId.toString()}`
 }
 
-export function createToken(contract: C0, collection: Collection, tokenId: BigInt): Token {
+export function createToken(event: ethereum.Event, contract: C0, collection: Collection, tokenId: BigInt): Token {
   const tokenStoreId = getTokenId(collection, tokenId)
 
   const token = new Token(tokenStoreId)
@@ -18,6 +18,7 @@ export function createToken(contract: C0, collection: Collection, tokenId: BigIn
   token.tokenId = tokenId
   token.tokenURI = contract.tokenURI(tokenId)
   token.ownerId = GENESIS_ADDRESS
+  token.mintTime = event.block.timestamp
 
   const tokenMetadata = updateTokenMetadata(token)
   if (tokenMetadata != null) {
@@ -48,6 +49,8 @@ function updateTokenMetadata(token: Token): TokenMetadata | null {
   }
 
   const metadata = new TokenMetadata(hash)
+
+  metadata.token = token.id
 
   const raw = metadataBytes.toString()
   if (raw != null) {

@@ -74,7 +74,7 @@ export function handleTransfer(event: TransferEvent): void {
   const tokenStoreId = getTokenId(collection, tokenId)
   let token = Token.load(tokenStoreId)
   if (token == null) {
-    token = createToken(contract, collection, tokenId)
+    token = createToken(event, contract, collection, tokenId)
   }
 
   token.ownerId = toAddress.toHex()
@@ -82,6 +82,10 @@ export function handleTransfer(event: TransferEvent): void {
 
   collection.transferCount = collection.transferCount.plus(BIGINT_ONE)
   collection.save()
+
+  const transfer = createTransfer(event)
+  transfer.token = token.id
+  transfer.save()
 }
 
 function createTransfer(event: TransferEvent): Transfer {

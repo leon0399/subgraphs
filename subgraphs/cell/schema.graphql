@@ -54,6 +54,12 @@ type Token @entity {
   " The owner for the token "
   ownerId: ID!
 
+  " Timestamp of the token's mint "
+  mintTime: BigInt!
+
+  " Token transfers "
+  transfers: [Transfer!]! @derivedFrom(field: "token")
+
   " Metadata for the token "
   metadata: TokenMetadata
 }
@@ -61,6 +67,9 @@ type Token @entity {
 type TokenMetadata @entity {
   " IPFS Hash "
   id: ID!
+
+  " Token for Metadata entity "
+  token: Token!
 
   name: String
 
@@ -89,6 +98,9 @@ type Transfer @entity {
 
   " ID of the token transferred "
   tokenId: BigInt!
+
+  " Token that was transfered "
+  token: Token!
 
   " Account that received the tokens "
   to: ID!
