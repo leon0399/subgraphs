@@ -10,6 +10,7 @@ export function getTokenId(collection: Collection, tokenId: BigInt): string {
 }
 
 export function createToken(
+  event: ethereum.Event,
   contract: F0,
   collection: Collection,
   tokenId: BigInt
@@ -22,6 +23,8 @@ export function createToken(
   token.tokenId = tokenId
   token.tokenURI = contract.tokenURI(tokenId)
   token.ownerId = GENESIS_ADDRESS
+  token.transferCount = BIGINT_ZERO
+  token.mintTime = event.block.timestamp
 
   token.save()
 

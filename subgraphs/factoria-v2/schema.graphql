@@ -22,9 +22,6 @@ type Collection @entity {
   " Total number of unique token owners holding tokens in the collection "
   ownerCount: BigInt!
 
-  " Total number of token transfer events "
-  transferCount: BigInt!
-
   " Address of collection owner. "
   ownerId: ID!
 
@@ -33,6 +30,9 @@ type Collection @entity {
 
   " Tokens in the collection "
   tokens: [Token!]! @derivedFrom(field: "collection")
+
+  " Total number of token transfer events "
+  transferCount: BigInt!
 
   " List of token transfers "
   transfers: [Transfer!]! @derivedFrom(field: "collection")
@@ -53,6 +53,15 @@ type Token @entity {
 
   " The owner for the token "
   ownerId: ID!
+
+  " Total number of token transfer events "
+  transferCount: BigInt!
+
+  " Token transfers "
+  transfers: [Transfer!]! @derivedFrom(field: "token")
+
+  " Timestamp of the token's mint "
+  mintTime: BigInt!
 }
 
 type Transfer @entity {
@@ -73,6 +82,9 @@ type Transfer @entity {
 
   " ID of the token transferred "
   tokenId: BigInt!
+
+  " Token that was transferred "
+  token: Token!
 
   " Account that received the tokens "
   to: ID!

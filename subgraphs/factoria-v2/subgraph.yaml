@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: Factoria
-    network: goerli
+    network: mainnet
     source:
       abi: Factory
-      address: "0x45368836342D6544f98FF4bA0A136C0508E3ac90"
-      startBlock: 7597726
+      address: "0x4d70631664f1cec37d33f289a3293662d70741c3"
+      startBlock: 14158321
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -28,7 +28,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Collection
-    network: goerli
+    network: mainnet
     source:
       abi: F0
     mapping:
