@@ -78,6 +78,7 @@ export function handleTransfer(event: TransferEvent): void {
   }
 
   token.ownerId = toAddress.toHex()
+  token.transferCount = token.transferCount.plus(BIGINT_ONE)
   token.save()
 
   collection.transferCount = collection.transferCount.plus(BIGINT_ONE)
@@ -103,6 +104,7 @@ function createTransfer(event: TransferEvent): Transfer {
   transfer.tokenId = event.params.tokenId
   transfer.from = event.params.from.toHex()
   transfer.to = event.params.to.toHex()
+  transfer.value = event.transaction.value
   transfer.blockNumber = event.block.number
   transfer.timestamp = event.block.timestamp
 

@@ -1,6 +1,6 @@
 import { ethereum, ipfs, json, BigInt, Bytes } from "@graphprotocol/graph-ts"
 
-import { GENESIS_ADDRESS } from './constants';
+import { BIGINT_ZERO, GENESIS_ADDRESS } from './constants';
 
 import { C0 } from '../../generated/Cell/C0';
 import { Token, TokenMetadata, Collection } from '../../generated/schema';
@@ -19,6 +19,8 @@ export function createToken(event: ethereum.Event, contract: C0, collection: Col
   token.tokenURI = contract.tokenURI(tokenId)
   token.ownerId = GENESIS_ADDRESS
   token.mintTime = event.block.timestamp
+  token.mintValue = event.transaction.value
+  token.transferCount = BIGINT_ZERO
 
   const tokenMetadata = updateTokenMetadata(token)
   if (tokenMetadata != null) {
