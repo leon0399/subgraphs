@@ -54,14 +54,17 @@ type Token @entity {
   " The owner for the token "
   ownerId: ID!
 
+  " Token's mint value in ETH "
+  mintValue: BigInt!
+
+  " Timestamp of the token's mint "
+  mintTime: BigInt!
+
   " Total number of token transfer events "
   transferCount: BigInt!
 
   " Token transfers "
   transfers: [Transfer!]! @derivedFrom(field: "token")
-
-  " Timestamp of the token's mint "
-  mintTime: BigInt!
 }
 
 type Transfer @entity {
@@ -91,6 +94,9 @@ type Transfer @entity {
 
   " Account that sent the tokens "
   from: ID!
+
+  " Token transfer transaction value in ETH "
+  value: BigInt!
 
   " Block number of this event "
   blockNumber: BigInt!

@@ -25,6 +25,7 @@ export function createToken(
   token.ownerId = GENESIS_ADDRESS
   token.transferCount = BIGINT_ZERO
   token.mintTime = event.block.timestamp
+  token.mintValue = event.transaction.value
 
   token.save()
 
