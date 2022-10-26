@@ -19,7 +19,7 @@ export function createCollection(
 
   collection.name = name.value
   collection.symbol = symbol.value
-  collection.deployerId = collectionOwnerAddress.toHex()
+  collection.deployerId = call.transaction.from.toHex()
   collection.ownerId = collectionOwnerAddress.toHex()
 
   collection.tokenCount = BIGINT_ZERO
