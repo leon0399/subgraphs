@@ -1,0 +1,25 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Stream
+    network: mainnet
+    source:
+      abi: Factory
+      address: "0xA9183BD6FFf2d50398e95a1Bf2FaA98Aff2FBE76"
+      startBlock: 13939098
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Factory
+        - Collection
+      abis:
+        - name: Factory
+          file: ./abis/factory.json
+      eventHandlers:
+        - event: ContractDeployed(indexed address,indexed address,bytes32,string)
+          handler: handleContractDeployed
+      file: ./src/mappings/factory.ts

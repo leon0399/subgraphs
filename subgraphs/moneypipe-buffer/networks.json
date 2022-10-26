@@ -1,0 +1,14 @@
+{
+  "mainnet": {
+    "Stream": {
+      "address": "0xA9183BD6FFf2d50398e95a1Bf2FaA98Aff2FBE76",
+      "startBlock": 13939098
+    }
+  },
+  "rinkeby": {
+    "Stream": {
+      "address": "0x6706c0452C82f1d57d25860A129627210438c075",
+      "startBlock": 9925028
+    }
+  }
+}
