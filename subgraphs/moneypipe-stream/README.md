@@ -1,4 +1,4 @@
-# Factoria Subgraph
+# Moneypipe Stream Subgraph
 
 Subgraph for [Moneypipe](https://moneypipe.xyz/)
 
@@ -10,5 +10,4 @@ Subgraph for [Moneypipe](https://moneypipe.xyz/)
 | Network | Hosted Service |
 | :------ | :------------- |
 | Mainnet | https://thegraph.com/hosted-service/subgraph/leon0399/moneypipe-stream        |
-| Goerli  | https://thegraph.com/hosted-service/subgraph/leon0399/moneypipe-stream-goerli |
 
