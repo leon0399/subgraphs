@@ -1,0 +1,18 @@
+type Factory @entity {
+  " Factory address "
+  id: ID!
+
+  " Amount of collections created"
+  buffersCount: BigInt!
+}
+
+type Buffer @entity {
+  " Contract address. "
+  id: ID!
+
+  " Address of collection owner. "
+  ownerId: ID!
+
+  " Address of collection deployer. "
+  deployerId: ID!
+}

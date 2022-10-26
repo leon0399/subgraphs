@@ -1,0 +1,25 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Buffer2
+    network: mumbai
+    source:
+      abi: Factory
+      address: "0xF1BA9c045b01402AFf7d571BF2Ff3322e1EE7972"
+      startBlock: 28618269
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Factory
+        - Collection
+      abis:
+        - name: Factory
+          file: ./abis/factory.json
+      eventHandlers:
+        - event: ContractDeployed(indexed address,indexed address)
+          handler: handleContractDeployed
+      file: ./src/mappings/factory.ts

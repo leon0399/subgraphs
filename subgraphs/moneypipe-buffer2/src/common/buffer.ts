@@ -9,7 +9,6 @@ export function createBuffer(
 ): Buffer {
   const buffer = new Buffer(streamAddress.toHex())
 
-  buffer.title = event.params.title
   buffer.deployerId = event.transaction.from.toHex()
   buffer.ownerId = streamOwnerAddress.toHex()
 

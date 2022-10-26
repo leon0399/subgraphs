@@ -23,7 +23,7 @@ export function handleContractDeployed(event: ContractDeployed): void {
   // Collection
 
   const streamAddress = event.params.group
-  const streamOwnerAddress = event.params.owner
+  const streamOwnerAddress = event.params.deployer
 
   let buffer = Buffer.load(streamAddress.toHex())
   if (buffer == null) {

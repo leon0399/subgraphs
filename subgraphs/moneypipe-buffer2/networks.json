@@ -1,0 +1,26 @@
+{
+  "mainnet": {
+    "Buffer2": {
+      "address": "0xf1ba9c045b01402aff7d571bf2ff3322e1ee7972",
+      "startBlock": 15741861
+    }
+  },
+  "goerli": {
+    "Buffer2": {
+      "address": "0x2ab0a7575859744c006B2492992A1898c705Ff11",
+      "startBlock": 7640540
+    }
+  },
+  "matic": {
+    "Buffer2": {
+      "address": "0xF1BA9c045b01402AFf7d571BF2Ff3322e1EE7972",
+      "startBlock": 34582685
+    }
+  },
+  "mumbai": {
+    "Buffer2": {
+      "address": "0xF1BA9c045b01402AFf7d571BF2Ff3322e1EE7972",
+      "startBlock": 28618269
+    }
+  }
+}
